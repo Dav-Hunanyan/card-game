@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace _13.Construcor__Enum__
 {
@@ -164,6 +165,7 @@ GOOD LUCK");                                                                    
 
             for (int i = 0; i < players_count; i++)
             {
+
                 switch (i)
                 {
                     case 0: Console.ForegroundColor = ConsoleColor.Cyan; break;         //gunavorum enq yuraqanchyur 
@@ -179,10 +181,23 @@ GOOD LUCK");                                                                    
             Console.WriteLine("\n\t\t\tGAME  STARTED\n");
             Cards_Type[] played_cards = new Cards_Type[32];
             int playedcards_count = 0;
+
+
+
             do
             {
+
                 for (int i = 0; i < players_count; i++)
                 {
+                    Console.Clear();
+                    if (i > 0)
+                    {
+                        Console.WriteLine(players[i - 1].name + " played: " + players[i - 1].played);
+                    }
+                    if (i == 0)
+                    {
+                        Console.WriteLine(players[players.Length - 1].name + " played: " + players[players.Length - 1].played);
+                    }
 
                     switch (i)
                     {
@@ -209,7 +224,7 @@ GOOD LUCK");                                                                    
                     players[i].delete(played);
                     Console.WriteLine();
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine(players[i].name + " played: " + players[i].played);
+
                     if (i > 0 && playedcards_count > 1 && players[i].played == played_cards[playedcards_count - 2])
                     {
                         players[i].losecase(played_cards, playedcards_count);
@@ -245,6 +260,8 @@ GOOD LUCK");                                                                    
                                 Console.WriteLine(players[i].name + " WIN");
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine(players[1].name + " LOSE");
+                                Thread.Sleep(2000);
+                                Console.Clear();
                             }
                             else
                             {
@@ -252,6 +269,8 @@ GOOD LUCK");                                                                    
                                 Console.WriteLine(players[i].name + " WIN");
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine(players[0].name + " LOSE");
+                                Thread.Sleep(2000);
+                                Console.Clear();
                             }
                             return;
                         }
